@@ -1,0 +1,26 @@
+@prefix brick: <https://brickschema.org/schema/1.0.3/Brick#> .
+@prefix bf: <https://brickschema.org/schema/1.0.3/BrickFrame#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix fb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#> .
+@prefix basicfb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#Basic#> . #Like imports
+@prefix basic_vavfb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#Basic#vav> .
+@prefix iot: <http://iotschema.org/>.
+@prefix base: <http://example.com/testbed#>.
+
+basicfb:vav rdfs:subClassOf iot:AirConditioner.
+
+
+base:vavfb1 iot:targetTemperature base:zntsp1.
+base:zntsp1 a iot:TargetTemperature.
+base:vavfb1 iot:temperature base:znt1.
+base:znt1 a iot:Temperature.
+base:vavfb1 iot:runMode base:occ1.
+base:vavfb1 iot:windStrength base:saf1.
+

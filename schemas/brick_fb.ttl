@@ -1,0 +1,95 @@
+@prefix brick: <https://brickschema.org/schema/1.0.3/Brick#> .
+@prefix bf: <https://brickschema.org/schema/1.0.3/BrickFrame#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix fb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#> .
+@prefix basicfb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#Basic#> . #Like imports
+@prefix vavfb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#Basic#vav> .
+
+
+fb:Port a owl:Class.
+fb:Input a owl:Class;
+    rdfs:subClassOf fb:Port.
+fb:Output a owl:Class;
+    rdfs:subClassOf fb:Port.
+
+fb:hasInput a owl:ObjectProperty.
+fb:hasOutput a owl:ObjectProperty.
+fb:hasFunction a owl:ObjectProperty.
+fb:mayHaveFunction a owl:AnnotationProperty.
+
+fb:FunctionalBlock a owl:Class;
+    skos:definition "FunctionalBlock is a functional abstraction over a collection of data points. It provides input/output interface as well as its functional description, which can be connected to other descriptional models such as IoT extension of schema.org. Input is the allowed interface to control the output. Internally, 'controls' relationship represents control dependency between the points. Each functional block has associated 'schemaorg:Capability' indicating what it is capable of, such as temperature change.";
+    rdfs:subClassOf [
+        a owl:Restriction;
+        owl:onProperty fb:hasInput;
+        owl:allValuesFrom fb:Input;
+        ];
+    rdfs:subClassOf [
+        a owl:Restriction;
+        owl:onProperty fb:hasOutput;
+        owl:allValuesFrom fb:Output;
+        ].
+
+# This defines a function, vavfb's namespace.
+# A function may define a subset of the functionalities a device provides.
+
+#In this example, the functional block's URI is matched as its dependents' namespaces. It is not necessary but desired.
+
+vavfb:zntsp_input rdfs:subClassOf fb:Input;
+    rdfs:subClassOf [
+        a owl:Restriction;
+        owl:allValuesFrom brick:Zone_Temperature_Setpoint;
+        owl:onProperty rdf:type;
+    ].
+
+vavfb:occ_input rdfs:subClassOf fb:Input;
+    rdfs:subClassOf [
+        a owl:Restriction;
+        owl:allValuesFrom brick:Occupancy_Command;
+        owl:onProperty rdf:type;
+    ].
+
+vavfb:saf_output rdfs:subClassOf fb:Output;
+    rdfs:subClassOf [
+        a owl:Restriction;
+        owl:allValuesFrom brick:Supply_Air_Flow_Sensor;
+        owl:onProperty rdf:type;
+    ].
+
+vavfb:znt_output rdfs:subClassOf fb:Output;
+    rdfs:subClassOf [
+        a owl:Restriction;
+        owl:allValuesFrom brick:Zone_Temperature_Sensor;
+        owl:onProperty rdf:type;
+    ].
+
+vavfb: rdfs:subClassOf fb:FunctionalBlock;
+    fb:mayBeAssociatedWith brick:VAV;
+    rdfs:subClassOf [
+        a owl:Restriction;
+        owl:allValuesFrom vavfb:zntsp_input;
+        owl:onProperty fb:hasInput;
+    ];
+    rdfs:subClassOf [
+        a owl:Restriction;
+        owl:allValuesFrom vavfb:occ_input;
+        owl:onProperty fb:hasInput;
+    ];
+    rdfs:subClassOf [
+        a owl:Restriction;
+        owl:allValuesFrom vavfb:znt_output;
+        owl:onProperty fb:hasOutput;
+    ];
+    rdfs:subClassOf [
+        a owl:Restriction;
+        owl:allValuesFrom vavfb:saf_output;
+        owl:onProperty fb:hasOutput;
+    ]
+    .
