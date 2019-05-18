@@ -1,0 +1,68 @@
+@prefix : <http://example.com/testbed#> .
+@prefix basicfb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#Basic#> .
+@prefix bf: <https://brickschema.org/schema/1.0.3/BrickFrame#> .
+@prefix brick: <https://brickschema.org/schema/1.0.3/Brick#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix fb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vavfb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#Basic#vav> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:vav1 a brick:VAV ;
+    bf:hasPoint :acsp1,
+        :occ1,
+        :saf1,
+        :safsp1,
+        :znt1,
+        :zntsp1 .
+
+:znt2 a brick:Zone_Temperature_Sensor .
+
+fb:FunctionalBlock a owl:Class ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom fb:Input ;
+            owl:onProperty fb:hasInput ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom fb:Output ;
+            owl:onProperty fb:hasOutput ] ;
+    skos:definition "FunctionalBlock is a functional abstraction over a collection of data points. It provides input/output interface as well as its functional description, which can be connected to other descriptional models such as IoT extension of schema.org. Input is the allowed interface to control the output. Internally, 'controls' relationship represents control dependency between the points. Each functional block has associated 'schemaorg:Capability' indicating what it is capable of, such as temperature change." .
+
+fb:hasFunction a owl:ObjectProperty .
+
+fb:mayHaveFunction a owl:AnnotationProperty .
+
+:acsp1 a brick:Effective_Cooling_Temperature_Setpoint .
+
+:occ1 a brick:Occupanct_Command .
+
+:room1 a brick:Room .
+
+:saf1 a brick:Supply_Air_Flow_Sensor .
+
+:safsp1 a brick:Supply_Air_Flow_Setpoint .
+
+:znt1 a brick:Zone_Temperature_Sensor ;
+    bf:hasLocation :room1 .
+
+:zntsp1 a brick:Zone_Temperature_Setpoint .
+
+fb:Input a owl:Class ;
+    rdfs:subClassOf fb:Port .
+
+fb:Output a owl:Class ;
+    rdfs:subClassOf fb:Port .
+
+fb:hasInput a owl:ObjectProperty ;
+    rdfs:subPropertyOf fb:hasPort .
+
+fb:hasOutput a owl:ObjectProperty ;
+    rdfs:subPropertyOf fb:hasPort .
+
+fb:Port a owl:Class .
+
+fb:hasPort a owl:ObjectProperty .
+

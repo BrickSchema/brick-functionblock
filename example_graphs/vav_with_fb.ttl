@@ -43,4 +43,4 @@
     fb:hasOutput :znt1;
     fb:hasOutput :saf1.
 
-:vav1 fb:hasFunction :vavfb1
+:vav1 fb:hasFunction :vavfb1.

@@ -10,8 +10,10 @@ print('\n')
 
 
 g = Graph()
-g.parse('brick_fb.ttl', format='turtle')
-g.parse('vav_example.ttl', format='turtle')
+g.parse('schemas/brick_fb.ttl', format='turtle')
+g.parse('schemas/brick_fb.ttl', format='turtle')
+g.parse('schemas/standard_fbs.ttl', format='turtle')
+g.parse('example_graphs/vav_with_fb.ttl', format='turtle')
 
 def print_all_res(g, qstr):
     print('------------------------------------')

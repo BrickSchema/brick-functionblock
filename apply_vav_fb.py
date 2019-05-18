@@ -4,7 +4,7 @@ from common import q_prefix
 
 g = rdflib.Graph()
 g.parse('schemas/brick_fb.ttl', format='turtle')
-g.parse('example_graphs/vav_example_without_fb.ttl', format='turtle')
+g.parse('example_graphs/vav_without_fb.ttl', format='turtle')
 
 fb_init_query = q_prefix + """
 INSERT {
@@ -48,4 +48,4 @@ INSERT {
 
 g.update(fb_init_query)
 g.update(port_init_query)
-g.serialize('example_graphs/vav_example_generated_fb.ttl', format='turtle')
+g.serialize('example_graphs/vav_generated_fb.ttl', format='turtle')
