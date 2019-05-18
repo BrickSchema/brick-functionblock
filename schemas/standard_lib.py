@@ -20,11 +20,12 @@ def vav(znt_input: Zone_Temperature_Setpoint,
             Supply_Air_Flow_Setpoint,
             Zone_Temperature_Sensor,
         ]:
-    frame = inspect.currentframe()
-    args, _, _, values = inspect.getargvalues(frame)
-    print('function name "%s"' % inspect.getframeinfo(frame)[2])
-    for i in args:
-        print("    %s = %s" % (i, values[i]))
+    #frame = inspect.currentframe()
+    #args, _, _, values = inspect.getargvalues(frame)
+    #print('function name "%s"' % inspect.getframeinfo(frame)[2])
+    #for i in args:
+    #    print("    %s = %s" % (i, values[i]))
+    pass
 
 vav(Zone_Temperature_Setpoint(), Occupancy_Command())
 #vav(Zone_Temperature_Setpoint(), Zone_Temperature_Sensor())
