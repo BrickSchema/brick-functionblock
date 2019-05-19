@@ -11,7 +11,7 @@
 
 @prefix fb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#> .
 @prefix basicfb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#Basic#> . #Like imports
-@prefix vavfb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#Basic#vav> .
+@prefix vav_fb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#Basic#VAV_FB#> .
 
 :vav1 a brick:VAV;
     bf:hasPoint :zntsp1;
@@ -26,21 +26,21 @@
 :safsp1 a brick:Supply_Air_Flow_Setpoint.
 :acsp1 a brick:Effective_Cooling_Temperature_Setpoint.
 :zntsp1 a brick:Zone_Temperature_Setpoint;
-    a vavfb:zntsp_input.
-:occ1 a brick:Occupanct_Command;
-    a vavfb:occ_input.
+    a vav_fb:zntsp_input.
+:occ1 a brick:Occupancy_Command;
+    a vav_fb:occ_input.
 :znt1 a brick:Zone_Temperature_Sensor;
-    a vavfb:znt_output;
+    a vav_fb:znt_output;
     bf:hasLocation :room1.
 :znt2 a brick:Zone_Temperature_Sensor;
-    a vavfb:znt_output. # There may be a redundant temperature sensor in the zone.
+    a vav_fb:znt_output. # There may be a redundant temperature sensor in the zone.
 :saf1 a brick:Supply_Air_Flow_Sensor;
-    a vavfb:saf_output.
+    a vav_fb:saf_output.
 
-:vavfb1 a basicfb:vav;
+:vav_fb1 a basicfb:VAV_FB;
     fb:hasInput :zntsp1;
     fb:hasInput :occ1;
     fb:hasOutput :znt1;
     fb:hasOutput :saf1.
 
-:vav1 fb:hasFunction :vavfb1.
+:vav1 fb:hasFunction :vav_fb1.

@@ -10,56 +10,59 @@
 
 @prefix fb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#> .
 @prefix basicfb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#Basic#> . #Like imports
-@prefix vavfb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#Basic#vav> .
 
-vavfb:zntsp_input rdfs:subClassOf fb:Input;
+@prefix vav_fb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#Basic#VAV_FB#> . # This specific namespace is used for one FB (i.e., VAV_FB)
+
+# This entity corresponds to a namespace, where its subcomponents (input/output) are defined.
+# Everything related to VAV_FB is defined under its namespace.
+basicfb:VAV_FB rdfs:subClassOf fb:FunctionalBlock;
+    rdfs:subClassOf [
+        a owl:Restriction;
+        owl:allValuesFrom vav_fb:zntsp_input;
+        owl:onProperty fb:hasInput;
+    ];
+    rdfs:subClassOf [
+        a owl:Restriction;
+        owl:allValuesFrom vav_fb:occ_input;
+        owl:onProperty fb:hasInput;
+    ];
+    rdfs:subClassOf [
+        a owl:Restriction;
+        owl:allValuesFrom vav_fb:znt_output;
+        owl:onProperty fb:hasOutput;
+    ];
+    rdfs:subClassOf [
+        a owl:Restriction;
+        owl:allValuesFrom vav_fb:saf_output;
+        owl:onProperty fb:hasOutput;
+    ].
+brick:VAV fb:mayHaveFunction basicfb:VAV_FB.
+
+vav_fb:zntsp_input rdfs:subClassOf fb:Input;
     rdfs:subClassOf [
         a owl:Restriction;
         owl:allValuesFrom brick:Zone_Temperature_Setpoint;
         owl:onProperty rdf:type;
     ].
 
-vavfb:occ_input rdfs:subClassOf fb:Input;
+vav_fb:occ_input rdfs:subClassOf fb:Input;
     rdfs:subClassOf [
         a owl:Restriction;
         owl:allValuesFrom brick:Occupancy_Command;
         owl:onProperty rdf:type;
     ].
 
-vavfb:saf_output rdfs:subClassOf fb:Output;
+vav_fb:saf_output rdfs:subClassOf fb:Output;
     rdfs:subClassOf [
         a owl:Restriction;
         owl:allValuesFrom brick:Supply_Air_Flow_Sensor;
         owl:onProperty rdf:type;
     ].
 
-vavfb:znt_output rdfs:subClassOf fb:Output;
+vav_fb:znt_output rdfs:subClassOf fb:Output;
     rdfs:subClassOf [
         a owl:Restriction;
         owl:allValuesFrom brick:Zone_Temperature_Sensor;
         owl:onProperty rdf:type;
     ].
 
-vavfb: rdfs:subClassOf fb:FunctionalBlock;
-    fb:mayBeAssociatedWith brick:VAV;
-    rdfs:subClassOf [
-        a owl:Restriction;
-        owl:allValuesFrom vavfb:zntsp_input;
-        owl:onProperty fb:hasInput;
-    ];
-    rdfs:subClassOf [
-        a owl:Restriction;
-        owl:allValuesFrom vavfb:occ_input;
-        owl:onProperty fb:hasInput;
-    ];
-    rdfs:subClassOf [
-        a owl:Restriction;
-        owl:allValuesFrom vavfb:znt_output;
-        owl:onProperty fb:hasOutput;
-    ];
-    rdfs:subClassOf [
-        a owl:Restriction;
-        owl:allValuesFrom vavfb:saf_output;
-        owl:onProperty fb:hasOutput;
-    ]
-    .

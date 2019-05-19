@@ -8,7 +8,7 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix vavfb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#Basic#vav> .
+@prefix vav_fb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#Basic#VAV_FB#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -18,9 +18,22 @@
         :saf1,
         :safsp1,
         :znt1,
-        :zntsp1 .
+        :zntsp1 ;
+    fb:hasFunction <urn:uuid:f7cd0628-e6be-45a2-ac43-48f8f483c347> .
 
 :znt2 a brick:Zone_Temperature_Sensor .
+
+fb:hasFunction a owl:ObjectProperty .
+
+fb:mayHaveFunction a owl:AnnotationProperty .
+
+:acsp1 a brick:Effective_Cooling_Temperature_Setpoint .
+
+:room1 a brick:Room .
+
+:safsp1 a brick:Supply_Air_Flow_Setpoint .
+
+brick:VAV fb:mayHaveFunction basicfb:VAV_FB .
 
 fb:FunctionalBlock a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
@@ -31,24 +44,62 @@ fb:FunctionalBlock a owl:Class ;
             owl:onProperty fb:hasOutput ] ;
     skos:definition "FunctionalBlock is a functional abstraction over a collection of data points. It provides input/output interface as well as its functional description, which can be connected to other descriptional models such as IoT extension of schema.org. Input is the allowed interface to control the output. Internally, 'controls' relationship represents control dependency between the points. Each functional block has associated 'schemaorg:Capability' indicating what it is capable of, such as temperature change." .
 
-fb:hasFunction a owl:ObjectProperty .
+<urn:uuid:f7cd0628-e6be-45a2-ac43-48f8f483c347> a basicfb:VAV_FB ;
+    fb:hasInput :occ1,
+        :zntsp1 ;
+    fb:hasOutput :saf1,
+        :znt1 .
 
-fb:mayHaveFunction a owl:AnnotationProperty .
+:occ1 a brick:Occupancy_Command,
+        vav_fb:occ_input .
 
-:acsp1 a brick:Effective_Cooling_Temperature_Setpoint .
+:saf1 a brick:Supply_Air_Flow_Sensor,
+        vav_fb:saf_output .
 
-:occ1 a brick:Occupanct_Command .
-
-:room1 a brick:Room .
-
-:saf1 a brick:Supply_Air_Flow_Sensor .
-
-:safsp1 a brick:Supply_Air_Flow_Setpoint .
-
-:znt1 a brick:Zone_Temperature_Sensor ;
+:znt1 a brick:Zone_Temperature_Sensor,
+        vav_fb:znt_output ;
     bf:hasLocation :room1 .
 
-:zntsp1 a brick:Zone_Temperature_Setpoint .
+:zntsp1 a brick:Zone_Temperature_Setpoint,
+        vav_fb:zntsp_input .
+
+basicfb:VAV_FB rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom vav_fb:zntsp_input ;
+            owl:onProperty fb:hasInput ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom vav_fb:occ_input ;
+            owl:onProperty fb:hasInput ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom vav_fb:znt_output ;
+            owl:onProperty fb:hasOutput ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom vav_fb:saf_output ;
+            owl:onProperty fb:hasOutput ],
+        fb:FunctionalBlock .
+
+vav_fb:occ_input rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom brick:Occupancy_Command ;
+            owl:onProperty rdf:type ],
+        fb:Input .
+
+vav_fb:saf_output rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom brick:Supply_Air_Flow_Sensor ;
+            owl:onProperty rdf:type ],
+        fb:Output .
+
+vav_fb:znt_output rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom brick:Zone_Temperature_Sensor ;
+            owl:onProperty rdf:type ],
+        fb:Output .
+
+vav_fb:zntsp_input rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom brick:Zone_Temperature_Setpoint ;
+            owl:onProperty rdf:type ],
+        fb:Input .
+
+fb:Port a owl:Class .
+
+fb:hasPort a owl:ObjectProperty .
 
 fb:Input a owl:Class ;
     rdfs:subClassOf fb:Port .
@@ -61,8 +112,4 @@ fb:hasInput a owl:ObjectProperty ;
 
 fb:hasOutput a owl:ObjectProperty ;
     rdfs:subPropertyOf fb:hasPort .
-
-fb:Port a owl:Class .
-
-fb:hasPort a owl:ObjectProperty .
 

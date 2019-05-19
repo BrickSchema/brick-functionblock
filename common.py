@@ -11,6 +11,6 @@ prefix xml: <http://www.w3.org/XML/1998/namespace>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix fb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#>
 prefix basicfb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#Basic#>
-prefix vavfb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#Basic#vav>
+prefix vav_fb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#Basic#VAV_FB#>
 prefix : <http://example.com/testbed#>
 """

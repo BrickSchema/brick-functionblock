@@ -29,7 +29,7 @@ def print_all_res(g, qstr):
 print('Get all input/output templates of the basic VAV FB, `basicfb:vav`.')
 qstr = """
 select ?input ?point_type where {
-vavfb: rdfs:subClassOf ?restriction.
+vav_fb: rdfs:subClassOf ?restriction.
 #basicfb:vav rdfs:subClassOf ?restriction.
 ?restriction a owl:Restriction.
 ?restriction owl:onProperty fb:hasInput.
@@ -52,12 +52,12 @@ select ?fb where {
 print_all_res(g, qstr)
 
 # Query actual input output of a functional block
-print('Get actual inputs/outputs of `vavfb1``')
+print('Get actual inputs/outputs of `vav_fb1``')
 qstr = """
 select ?port ?port_type where {
-{:vavfb1 fb:hasInput ?port.}
+{:vav_fb1 fb:hasInput ?port.}
 UNION
-{:vavfb1 fb:hasOutput ?port.}
+{:vav_fb1 fb:hasOutput ?port.}
 ?port a ?port_class.
 ?port_class rdfs:subClassOf ?port_type.
 ?port_type rdfs:subClassOf fb:Port.
@@ -65,12 +65,12 @@ UNION
 """
 print_all_res(g, qstr)
 
-print('Get actual inputs/outputs of `vavfb1``')
+print('Get actual inputs/outputs of `vav_fb1``')
 qstr = """
 select ?port ?port_type where {
-{:vavfb1 fb:hasInput ?port.}
+{:vav_fb1 fb:hasInput ?port.}
 UNION
-{:vavfb1 fb:hasOutput ?port.}
+{:vav_fb1 fb:hasOutput ?port.}
 ?port a ?port_class.
 ?port_class rdfs:subClassOf ?port_type.
 ?port_type rdfs:subClassOf fb:Port.

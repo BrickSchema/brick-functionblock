@@ -11,7 +11,7 @@
 
 @prefix fb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#> .
 @prefix basicfb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#Basic#> . #Like imports
-@prefix vavfb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#Basic#vav> .
+@prefix vav_fb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#Basic#VAV_FB#> .
 
 :vav1 a brick:VAV;
     bf:hasPoint :zntsp1;
@@ -26,7 +26,7 @@
 :safsp1 a brick:Supply_Air_Flow_Setpoint.
 :acsp1 a brick:Effective_Cooling_Temperature_Setpoint.
 :zntsp1 a brick:Zone_Temperature_Setpoint.
-:occ1 a brick:Occupanct_Command.
+:occ1 a brick:Occupancy_Command.
 :znt1 a brick:Zone_Temperature_Sensor;
     bf:hasLocation :room1.
 :znt2 a brick:Zone_Temperature_Sensor.

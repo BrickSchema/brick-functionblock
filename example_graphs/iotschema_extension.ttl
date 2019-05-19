@@ -10,17 +10,17 @@
 
 @prefix fb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#> .
 @prefix basicfb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#Basic#> . #Like imports
-@prefix basic_vavfb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#Basic#vav> .
+@prefix basic_vav_fb: <https://brickschema.org/schema/1.0.3/BrickFunctionalBlock#Basic#vav> .
 @prefix iot: <http://iotschema.org/>.
 @prefix base: <http://example.com/testbed#>.
 
 basicfb:vav rdfs:subClassOf iot:AirConditioner.
 
 
-base:vavfb1 iot:targetTemperature base:zntsp1.
+base:vav_fb1 iot:targetTemperature base:zntsp1.
 base:zntsp1 a iot:TargetTemperature.
-base:vavfb1 iot:temperature base:znt1.
+base:vav_fb1 iot:temperature base:znt1.
 base:znt1 a iot:Temperature.
-base:vavfb1 iot:runMode base:occ1.
-base:vavfb1 iot:windStrength base:saf1.
+base:vav_fb1 iot:runMode base:occ1.
+base:vav_fb1 iot:windStrength base:saf1.
 
