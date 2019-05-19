@@ -26,11 +26,10 @@ def print_all_res(g, qstr):
 
 # Query input/output template from a FunctionalBlock class.
 # Outputs can be retreived in a similar way.
-print('Get all input/output templates of the basic VAV FB, `basicfb:vav`.')
+print('Get all input/output templates of the basic VAV FB, `basicfb:VAV_FB`.')
 qstr = """
 select ?input ?point_type where {
-vav_fb: rdfs:subClassOf ?restriction.
-#basicfb:vav rdfs:subClassOf ?restriction.
+basicfb:VAV_FB rdfs:subClassOf ?restriction.
 ?restriction a owl:Restriction.
 ?restriction owl:onProperty fb:hasInput.
 ?restriction owl:allValuesFrom ?input.
